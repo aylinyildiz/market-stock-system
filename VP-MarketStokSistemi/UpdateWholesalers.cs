@@ -18,7 +18,7 @@ namespace VP_MarketStokSistemi
             InitializeComponent();
         }
 
-        SqlConnection connect = new SqlConnection(@"Data Source=DESKTOP-2NBD61T\SQLEXPRESS;Integrated Security=True;initial catalog=northwind;");
+        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
         DataSet daset = new DataSet();
        
         private void UpdateWholesalers_Load(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace VP_MarketStokSistemi
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             connect.Open();
-            SqlCommand command = new SqlCommand("Update Wholesalers set CompanyName=@CompanyName,ContactName=@ContactName,Address=@Address,Phone=@Phone,Fax=@Fax", connect);
+            SqlCommand command = new SqlCommand("Update Wholesalers set CompanyName=@CompanyName,ContactName=@ContactName,Address=@Address,Phone=@Phone,Fax=@Fax where ID = '" + Convert.ToInt32(dgwWholesalers.CurrentRow.Cells[0].Value) + "'", connect);
             command.Parameters.AddWithValue("@CompanyName", txtCompanyName.Text);
             command.Parameters.AddWithValue("@ContactName", txtContactName.Text);
             command.Parameters.AddWithValue("@Address", txtAddress.Text);
@@ -45,9 +45,10 @@ namespace VP_MarketStokSistemi
             command.Parameters.AddWithValue("@Fax", txtFax.Text);
             command.ExecuteNonQuery();
             connect.Close();
+            ListWholesalers();       
             daset.Tables["Wholesalers"].Clear();
             MessageBox.Show("Wholesaler updated!");
-            ListWholesalers();
+         
             foreach (Control item in this.Controls)
             {
                 if (item is TextBox)

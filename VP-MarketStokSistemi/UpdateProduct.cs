@@ -18,7 +18,7 @@ namespace VP_MarketStokSistemi
             InitializeComponent();
         }
         //Veritabanı bağlantısını değiştirdim
-        SqlConnection connect = new SqlConnection(@"Data Source=DESKTOP-2NBD61T\SQLEXPRESS;Integrated Security=True;initial catalog=northwind;");
+        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
         DataSet daset = new DataSet();
         private void UpdateProduct_Load(object sender, EventArgs e)
         {

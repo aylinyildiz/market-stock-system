@@ -17,7 +17,7 @@ namespace VP_MarketStokSistemi
         {
             InitializeComponent();
         }
-        SqlConnection connect = new SqlConnection(@"Data Source=DESKTOP-2NBD61T\SQLEXPRESS;Integrated Security=True;initial catalog=northwind;");
+        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
         DataSet daset = new DataSet();
         private void Wholesalers_Load(object sender, EventArgs e)
         {
@@ -47,7 +47,24 @@ namespace VP_MarketStokSistemi
         {
             UpdateWholesalers updateWholesalers = new UpdateWholesalers();
             updateWholesalers.ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            connect.Open();
+            SqlCommand command = new SqlCommand("delete from Wholesalers where ID = " + dgwWholesalers.CurrentRow.Cells
+                ["ID"].Value.ToString(), connect);
+            command.ExecuteNonQuery();
+            connect.Close();
+            daset.Tables["Wholesalers"].Clear();
             ListWholesalers();
+            MessageBox.Show("Whosaler deleted");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            this.dgwWholesalers.;
         }
     }
 }
