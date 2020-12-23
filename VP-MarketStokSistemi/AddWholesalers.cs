@@ -17,7 +17,7 @@ namespace VP_MarketStokSistemi
         {
             InitializeComponent();
         }
-        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+        SqlConnection connect = new SqlConnection(@"Data Source=DESKTOP-2NBD61T\SQLEXPRESS;Integrated Security=True;initial catalog=northwind;");
         private void btnAdd_Click(object sender, EventArgs e)
         {
             connect.Open();

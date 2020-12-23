@@ -17,10 +17,9 @@ namespace VP_MarketStokSistemi
         {
             InitializeComponent();
         }
-
-        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+        //Veritabanı bağlantısını değiştirdim
+        SqlConnection connect = new SqlConnection(@"Data Source=DESKTOP-2NBD61T\SQLEXPRESS;Integrated Security=True;initial catalog=northwind;");
         DataSet daset = new DataSet();
-        DataSet daset2 = new DataSet();
         private void UpdateProduct_Load(object sender, EventArgs e)
         {
             ListProduct();
@@ -34,41 +33,45 @@ namespace VP_MarketStokSistemi
             dgwProduct.DataSource = daset.Tables["Products"];
             connect.Close();
         }
+
+        //Kategorileri alıp listeledim
         private void ListCategories()
         {
             connect.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select CategoryID from Categories", connect);
-            adtr.Fill(daset2, "Categories");
-            comboBox1.DataSource = daset2.Tables["Categories"];
+            DataTable dt = new DataTable();
+            SqlDataAdapter adtr = new SqlDataAdapter("select CategoryID,CategoryName from Categories", connect);
+            adtr.Fill(dt);
+
+            if (dt.Rows.Count > 0)
+            {
+                comboBox1.DisplayMember = "CategoryName";
+                comboBox1.ValueMember = "CategoryID";
+                comboBox1.DataSource = dt;
+            }
+            else
+            {
+                comboBox1.Text = "";
+            }
             connect.Close();
         }
-
         private void dgwProduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //var row = dgwProduct.CurrentRow;
-            //txtProductName.Text = row.Cells[2].Value.ToString();
-            //comboBox1.SelectedValue = row.Cells[1].ToString();
-            //txtUnitPrice.Text = row.Cells[3].Value.ToString();
-            //txtUnitInStock.Text = row.Cells[4].Value.ToString();
-            //txtQuantity.Text = row.Cells[5].Value.ToString();
-
             txtProductName.Text = dgwProduct.CurrentRow.Cells["ProductName"].Value.ToString();
-            comboBox1.Text = dgwProduct.CurrentRow.Cells["CategoryID"].Value.ToString();
+            comboBox1.SelectedValue = dgwProduct.CurrentRow.Cells["CategoryID"].Value.ToString(); //selected value
             txtUnitPrice.Text = dgwProduct.CurrentRow.Cells["UnitPrice"].Value.ToString();
             txtUnitInStock.Text = dgwProduct.CurrentRow.Cells["UnitsInStock"].Value.ToString();
             txtQuantity.Text = dgwProduct.CurrentRow.Cells["QuantityPerUnit"].Value.ToString();
-
-
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             connect.Open();
-            SqlCommand command = new SqlCommand("Update Products set ProductName=@ProductName,CategoryID=@CategoryID,UnitPrice=@UnitPrice,UnitsInStock=@UnitsInStock,QuantityPerUnit=@QuantityPerUnit",connect);
+            //sorguya hangi product olduğunu belirtmek için product id girdim.
+            SqlCommand command = new SqlCommand("Update Products set  ProductName=@ProductName,CategoryID=@CategoryID,UnitPrice=@UnitPrice,UnitsInStock=@UnitsInStock,QuantityPerUnit=@QuantityPerUnit where ProductID='" + Convert.ToInt32(dgwProduct.CurrentRow.Cells[0].Value) + "'", connect);
             command.Parameters.AddWithValue("@ProductName", txtProductName.Text);
+            //convert kullandım çünkü tipleri veri tababnında böyle
             command.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(comboBox1.SelectedValue));
-            command.Parameters.AddWithValue("@UnitPrice", txtUnitPrice.Text);
-            command.Parameters.AddWithValue("@UnitsInStock", txtUnitInStock.Text);
+            command.Parameters.AddWithValue("@UnitPrice", Convert.ToDecimal(txtUnitPrice.Text));
+            command.Parameters.AddWithValue("@UnitsInStock", Convert.ToInt16(txtUnitInStock.Text));
             command.Parameters.AddWithValue("@QuantityPerUnit", txtQuantity.Text);
             command.ExecuteNonQuery();
             connect.Close();
@@ -88,7 +91,7 @@ namespace VP_MarketStokSistemi
         {
             connect.Open();
             SqlCommand command = new SqlCommand("delete from Products where ProductID = " + dgwProduct.CurrentRow.Cells
-                ["ProductID"].Value.ToString(),connect);
+                ["ProductID"].Value.ToString(), connect);
             command.ExecuteNonQuery();
             connect.Close();
             daset.Tables["Products"].Clear();
@@ -100,10 +103,14 @@ namespace VP_MarketStokSistemi
         {
             DataTable table = new DataTable();
             connect.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select ProductID,ProductName,CategoryID,UnitPrice,UnitsInStock,QuantityPerUnit from Products where ProductName like '%" + textBox1.Text+"%'",connect);
+            SqlDataAdapter adtr = new SqlDataAdapter("select ProductID,ProductName,CategoryID,UnitPrice,UnitsInStock,QuantityPerUnit from Products where ProductName like '%" + textBox1.Text + "%'", connect);
             adtr.Fill(table);
             dgwProduct.DataSource = table;
             connect.Close();
+        }
+       
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }
