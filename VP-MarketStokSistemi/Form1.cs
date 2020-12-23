@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace VP_MarketStokSistemi
 {
-    public partial class btnWholesalers : Form
+    public partial class Form1 : Form
     {
-        public btnWholesalers()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -121,6 +121,11 @@ namespace VP_MarketStokSistemi
         private void lblSearch_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

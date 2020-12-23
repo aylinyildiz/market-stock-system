@@ -16,7 +16,7 @@ namespace VP_MarketStokSistemi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new btnWholesalers());
+            Application.Run(new LoginForm());
         }
     }
 }
