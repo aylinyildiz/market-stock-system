@@ -17,7 +17,7 @@ namespace VP_MarketStokSistemi
         {
             InitializeComponent();
         }
-        SqlConnection connect = new SqlConnection(@"(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
         DataSet daset = new DataSet();
         private void DescendingProducts_Load(object sender, EventArgs e)
         {

@@ -45,10 +45,9 @@ namespace VP_MarketStokSistemi
             command.Parameters.AddWithValue("@Fax", txtFax.Text);
             command.ExecuteNonQuery();
             connect.Close();
-            ListWholesalers();       
             daset.Tables["Wholesalers"].Clear();
+            ListWholesalers();
             MessageBox.Show("Wholesaler updated!");
-         
             foreach (Control item in this.Controls)
             {
                 if (item is TextBox)

@@ -58,6 +58,7 @@
             this.dgwProduct.RowTemplate.Height = 24;
             this.dgwProduct.Size = new System.Drawing.Size(901, 479);
             this.dgwProduct.TabIndex = 0;
+            this.dgwProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwProduct_CellContentClick);
             this.dgwProduct.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwProduct_CellDoubleClick);
             // 
             // groupBox1
@@ -74,16 +75,16 @@
             this.groupBox1.Controls.Add(this.lblCategory);
             this.groupBox1.Controls.Add(this.txtProductName);
             this.groupBox1.Controls.Add(this.lblProductName);
-            this.groupBox1.Location = new System.Drawing.Point(12, 113);
+            this.groupBox1.Location = new System.Drawing.Point(12, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(293, 502);
+            this.groupBox1.Size = new System.Drawing.Size(293, 532);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Product Information";
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(151, 411);
+            this.btnDelete.Location = new System.Drawing.Point(146, 433);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(123, 54);
             this.btnDelete.TabIndex = 4;
@@ -93,7 +94,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(9, 411);
+            this.btnUpdate.Location = new System.Drawing.Point(2, 433);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(120, 54);
             this.btnUpdate.TabIndex = 13;

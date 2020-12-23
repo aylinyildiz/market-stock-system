@@ -107,5 +107,20 @@ namespace VP_MarketStokSistemi
             txtUnitInStock.Text = dataGridView1.CurrentRow.Cells["UnitsInStock"].Value.ToString();
             txtQuantity.Text = dataGridView1.CurrentRow.Cells["QuantityPerUnit"].Value.ToString();
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            DataTable table = new DataTable();
+            connect.Open();
+            SqlDataAdapter adtr = new SqlDataAdapter("select ProductID,ProductName,CategoryID,UnitPrice,UnitsInStock,QuantityPerUnit from Products where ProductName like '%" + txtSearch.Text + "%'", connect);
+            adtr.Fill(table);
+            dataGridView1.DataSource = table;
+            connect.Close();
+        }
+
+        private void lblSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

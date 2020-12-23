@@ -112,5 +112,10 @@ namespace VP_MarketStokSistemi
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+
+        private void dgwProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

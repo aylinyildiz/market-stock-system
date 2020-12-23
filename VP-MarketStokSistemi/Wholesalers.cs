@@ -61,9 +61,14 @@ namespace VP_MarketStokSistemi
             MessageBox.Show("Whosaler deleted");
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-
+            DataTable table = new DataTable();
+            connect.Open();
+            SqlDataAdapter adtr = new SqlDataAdapter("select ID, CompanyName, ContactName, Address, City, Phone, Fax from Wholesalers where CompanyName like '%" + txtSearch.Text + "%'", connect);
+            adtr.Fill(table);
+            dgwWholesalers.DataSource = table;
+            connect.Close();
         }
     }
 }
