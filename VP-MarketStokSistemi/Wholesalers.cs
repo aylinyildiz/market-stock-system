@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -17,7 +18,7 @@ namespace VP_MarketStokSistemi
         {
             InitializeComponent();
         }
-        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+        string connect = ConfigurationManager.ConnectionStrings["connection_string"].ConnectionString;
         DataSet daset = new DataSet();
         private void Wholesalers_Load(object sender, EventArgs e)
         {
@@ -25,11 +26,14 @@ namespace VP_MarketStokSistemi
         }
         private void ListWholesalers()
         {
-            connect.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select ID, CompanyName, ContactName, Address, City, Phone, Fax from Wholesalers", connect);
-            adtr.Fill(daset, "Wholesalers");
-            dgwWholesalers.DataSource = daset.Tables["Wholesalers"];
-            connect.Close();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlDataAdapter adtr = new SqlDataAdapter("select ID, CompanyName, ContactName, Address, City, Phone, Fax from Wholesalers", con);
+                adtr.Fill(daset, "Wholesalers");
+                dgwWholesalers.DataSource = daset.Tables["Wholesalers"];
+                con.Close();
+            }
         }
         private void dgwWholesalers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -51,11 +55,14 @@ namespace VP_MarketStokSistemi
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            connect.Open();
-            SqlCommand command = new SqlCommand("delete from Wholesalers where ID = " + dgwWholesalers.CurrentRow.Cells
-                ["ID"].Value.ToString(), connect);
-            command.ExecuteNonQuery();
-            connect.Close();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlCommand command = new SqlCommand("delete from Wholesalers where ID = " + dgwWholesalers.CurrentRow.Cells
+                ["ID"].Value.ToString(), con);
+                command.ExecuteNonQuery();
+                con.Close();
+            }
             daset.Tables["Wholesalers"].Clear();
             ListWholesalers();
             MessageBox.Show("Whosaler deleted");
@@ -64,11 +71,14 @@ namespace VP_MarketStokSistemi
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             DataTable table = new DataTable();
-            connect.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select ID, CompanyName, ContactName, Address, City, Phone, Fax from Wholesalers where CompanyName like '%" + txtSearch.Text + "%'", connect);
-            adtr.Fill(table);
-            dgwWholesalers.DataSource = table;
-            connect.Close();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlDataAdapter adtr = new SqlDataAdapter("select ID, CompanyName, ContactName, Address, City, Phone, Fax from Wholesalers where CompanyName like '%" + txtSearch.Text + "%'", con);
+                adtr.Fill(table);
+                dgwWholesalers.DataSource = table;
+                con.Close();
+            }
         }
     }
 }

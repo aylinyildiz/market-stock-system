@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace VP_MarketStokSistemi
 {
@@ -17,11 +18,11 @@ namespace VP_MarketStokSistemi
         {
             InitializeComponent();
         }
-        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+        string connect = ConfigurationManager.ConnectionStrings["connection_string"].ConnectionString;
+
         private void AddProduct_Load(object sender, EventArgs e)
         {
-            string constr = (@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
-            using (SqlConnection con = new SqlConnection(constr))
+            using (SqlConnection con = new SqlConnection(connect))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter("SELECT CategoryID, CategoryName FROM Categories", con))
                 {
@@ -42,24 +43,27 @@ namespace VP_MarketStokSistemi
                 }
             }
         }
-      
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            connect.Open();
-            SqlCommand command = new SqlCommand("insert into Products (ProductName, CategoryID, UnitPrice,UnitsInStock,QuantityPerUnit) values(@ProductName, @CategoryID, @UnitPrice,@UnitsInStock,@QuantityPerUnit)",connect);
-            command.Parameters.AddWithValue("@ProductName", txtProductName.Text);
-            command.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(comboBox1.SelectedValue));
-            command.Parameters.AddWithValue("@UnitPrice", txtUnitPrice.Text);
-            command.Parameters.AddWithValue("@UnitsInStock", txtUnitInStock.Text);
-            command.Parameters.AddWithValue("@QuantityPerUnit", txtQuantity.Text);
-            command.ExecuteNonQuery();
-            connect.Close();
-            MessageBox.Show("Product added!");
-            foreach (Control item in this.Controls)
+            using (SqlConnection con = new SqlConnection(connect))
             {
-                if (item is TextBox)
+                SqlCommand command = new SqlCommand("insert into Products (ProductName, CategoryID, UnitPrice,UnitsInStock,QuantityPerUnit) values(@ProductName, @CategoryID, @UnitPrice,@UnitsInStock,@QuantityPerUnit)", con);
+                con.Open();
+                command.Parameters.AddWithValue("@ProductName", txtProductName.Text);
+                command.Parameters.AddWithValue("@CategoryID", Convert.ToInt32(comboBox1.SelectedValue));
+                command.Parameters.AddWithValue("@UnitPrice", txtUnitPrice.Text);
+                command.Parameters.AddWithValue("@UnitsInStock", txtUnitInStock.Text);
+                command.Parameters.AddWithValue("@QuantityPerUnit", txtQuantity.Text);
+                command.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("Product added!");
+                foreach (Control item in this.Controls)
                 {
-                    item.Text = "";
+                    if (item is TextBox)
+                    {
+                        item.Text = "";
+                    }
                 }
             }
         }
