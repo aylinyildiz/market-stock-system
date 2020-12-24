@@ -33,6 +33,7 @@ namespace VP_MarketStokSistemi
                 adtr.Fill(daset, "Wholesalers");
                 dgwWholesalers.DataSource = daset.Tables["Wholesalers"];
                 con.Close();
+
             }
         }
         private void dgwWholesalers_CellContentClick(object sender, DataGridViewCellEventArgs e)
