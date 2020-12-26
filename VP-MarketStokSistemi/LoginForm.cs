@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace VP_MarketStokSistemi
 {
@@ -25,12 +26,12 @@ namespace VP_MarketStokSistemi
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+            string connection = ConfigurationManager.ConnectionStrings["connection_string"].ConnectionString;
             string query = "Select * from Users where UserName= '" + txtUsername.Text.Trim() + "' and password = '" + txtPassword.Text.Trim() + "'";
             SqlDataAdapter sda = new SqlDataAdapter(query, connection);
             DataTable dtb = new DataTable();
             sda.Fill(dtb);
-            if(dtb.Rows.Count==1)
+            if (dtb.Rows.Count == 1)
             {
                 Form1 form = new Form1();
                 this.Hide();

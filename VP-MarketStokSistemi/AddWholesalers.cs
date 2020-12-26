@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -17,19 +18,22 @@ namespace VP_MarketStokSistemi
         {
             InitializeComponent();
         }
-        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+        string connect = ConfigurationManager.ConnectionStrings["connection_string"].ConnectionString;
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            connect.Open();
-            SqlCommand command = new SqlCommand("insert into Wholesalers (CompanyName, ContactName, Address, City, Phone, Fax) values(@CompanyName, @ContactName, @Address, @City, @Phone, @Fax)", connect);
-            command.Parameters.AddWithValue("@CompanyName", txtCompanyName.Text);
-            command.Parameters.AddWithValue("@ContactName", txtContactName.Text);
-            command.Parameters.AddWithValue("@Address", txtAddress.Text);
-            command.Parameters.AddWithValue("@City", txtCity.Text);
-            command.Parameters.AddWithValue("@Phone", txtPhone.Text);
-            command.Parameters.AddWithValue("@Fax", txtFax.Text);
-            command.ExecuteNonQuery();
-            connect.Close();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlCommand command = new SqlCommand("insert into Wholesalers (CompanyName, ContactName, Address, City, Phone, Fax) values(@CompanyName, @ContactName, @Address, @City, @Phone, @Fax)", con);
+                command.Parameters.AddWithValue("@CompanyName", txtCompanyName.Text);
+                command.Parameters.AddWithValue("@ContactName", txtContactName.Text);
+                command.Parameters.AddWithValue("@Address", txtAddress.Text);
+                command.Parameters.AddWithValue("@City", txtCity.Text);
+                command.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                command.Parameters.AddWithValue("@Fax", txtFax.Text);
+                command.ExecuteNonQuery();
+                con.Close();
+            }
             MessageBox.Show("Wholesalers added!");
             
             foreach (Control item in this.Controls)

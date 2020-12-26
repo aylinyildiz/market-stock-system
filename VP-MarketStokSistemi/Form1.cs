@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -18,7 +19,7 @@ namespace VP_MarketStokSistemi
             InitializeComponent();
         }
 
-        SqlConnection connect = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
+        string connect = ConfigurationManager.ConnectionStrings["connection_string"].ConnectionString;
         DataSet daset = new DataSet();
         private void label1_Click(object sender, EventArgs e)
         {
@@ -33,13 +34,12 @@ namespace VP_MarketStokSistemi
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string constr = (@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;initial catalog=northwind;");
-            using (SqlConnection con = new SqlConnection(constr))
+            using (SqlConnection con = new SqlConnection(connect))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter("SELECT CategoryID, CategoryName FROM Categories", con))
                 {
@@ -63,11 +63,14 @@ namespace VP_MarketStokSistemi
         }
         private void ListProduct()
         {
-            connect.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select ProductID,ProductName,CategoryID,UnitPrice,UnitsInStock,QuantityPerUnit from Products", connect);
-            adtr.Fill(daset, "Products");
-            dataGridView1.DataSource = daset.Tables["Products"];
-            connect.Close();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlDataAdapter adtr = new SqlDataAdapter("select ProductID,ProductName,CategoryID,UnitPrice,UnitsInStock,QuantityPerUnit from Products", con);
+                adtr.Fill(daset, "Products");
+                dataGridView1.DataSource = daset.Tables["Products"];
+                con.Close();
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -110,12 +113,15 @@ namespace VP_MarketStokSistemi
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            DataTable table = new DataTable();
-            connect.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select ProductID,ProductName,CategoryID,UnitPrice,UnitsInStock,QuantityPerUnit from Products where ProductName like '%" + txtSearch.Text + "%'", connect);
-            adtr.Fill(table);
-            dataGridView1.DataSource = table;
-            connect.Close();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                DataTable table = new DataTable();
+                con.Open();
+                SqlDataAdapter adtr = new SqlDataAdapter("select ProductID,ProductName,CategoryID,UnitPrice,UnitsInStock,QuantityPerUnit from Products where ProductName like '%" + txtSearch.Text + "%'", con);
+                adtr.Fill(table);
+                dataGridView1.DataSource = table;
+                con.Close();
+            }
         }
 
         private void lblSearch_Click(object sender, EventArgs e)
