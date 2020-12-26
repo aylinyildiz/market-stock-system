@@ -82,12 +82,15 @@ namespace VP_MarketStokSistemi
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            DataTable table = new DataTable();
-            connect.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select ID, CompanyName, ContactName, Address, City, Phone, Fax from Wholesalers where CompanyName like '%" + txtSearch.Text + "%'", connect);
-            adtr.Fill(table);
-            dgwWholesalers.DataSource = table;
-            connect.Close();
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                DataTable table = new DataTable();
+                con.Open();
+                SqlDataAdapter adtr = new SqlDataAdapter("select ID, CompanyName, ContactName, Address, City, Phone, Fax from Wholesalers where CompanyName like '%" + txtSearch.Text + "%'", con);
+                adtr.Fill(table);
+                dgwWholesalers.DataSource = table;
+                con.Close();
+            }
         }
     }
 }
