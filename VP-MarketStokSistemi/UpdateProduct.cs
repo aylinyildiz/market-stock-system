@@ -56,11 +56,7 @@ namespace VP_MarketStokSistemi
         }
         private void dgwProduct_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtProductName.Text = dgwProduct.CurrentRow.Cells["ProductName"].Value.ToString();
-            comboBox1.SelectedValue = dgwProduct.CurrentRow.Cells["CategoryID"].Value.ToString(); //selected value
-            txtUnitPrice.Text = dgwProduct.CurrentRow.Cells["UnitPrice"].Value.ToString();
-            txtUnitInStock.Text = dgwProduct.CurrentRow.Cells["UnitsInStock"].Value.ToString();
-            txtQuantity.Text = dgwProduct.CurrentRow.Cells["QuantityPerUnit"].Value.ToString();
+            
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -116,6 +112,15 @@ namespace VP_MarketStokSistemi
         private void dgwProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dgwProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtProductName.Text = dgwProduct.CurrentRow.Cells["ProductName"].Value.ToString();
+            comboBox1.SelectedValue = dgwProduct.CurrentRow.Cells["CategoryID"].Value.ToString(); //selected value
+            txtUnitPrice.Text = dgwProduct.CurrentRow.Cells["UnitPrice"].Value.ToString();
+            txtUnitInStock.Text = dgwProduct.CurrentRow.Cells["UnitsInStock"].Value.ToString();
+            txtQuantity.Text = dgwProduct.CurrentRow.Cells["QuantityPerUnit"].Value.ToString();
         }
     }
 }

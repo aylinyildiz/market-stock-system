@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.Button btnDelete;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -54,6 +54,20 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnDelete.Location = new System.Drawing.Point(555, 49);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(145, 80);
+            btnDelete.TabIndex = 4;
+            btnDelete.Text = "Delete Product";
+            btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -69,6 +83,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.txtQuantity);
             this.groupBox1.Controls.Add(this.lblQuantity);
@@ -195,20 +210,6 @@
             this.btnList.Text = "       Descending     Products";
             this.btnList.UseVisualStyleBackColor = false;
             this.btnList.Click += new System.EventHandler(this.btnList_Click);
-            // 
-            // btnDelete
-            // 
-            btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnDelete.Location = new System.Drawing.Point(555, 49);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(145, 80);
-            btnDelete.TabIndex = 4;
-            btnDelete.Text = "Delete Product";
-            btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            btnDelete.UseVisualStyleBackColor = false;
-            btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 

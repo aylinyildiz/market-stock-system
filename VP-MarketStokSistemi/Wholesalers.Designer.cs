@@ -119,12 +119,13 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(1276, 74);
+            this.button2.Location = new System.Drawing.Point(1276, 63);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(154, 75);
             this.button2.TabIndex = 8;
             this.button2.Text = "CLOSE";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Wholesalers
             // 

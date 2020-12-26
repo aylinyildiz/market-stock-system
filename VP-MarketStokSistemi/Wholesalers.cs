@@ -70,5 +70,10 @@ namespace VP_MarketStokSistemi
             dgwWholesalers.DataSource = table;
             connect.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
