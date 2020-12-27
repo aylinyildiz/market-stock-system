@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddWholesalers));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtContactName = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.groupBox1.Controls.Add(this.txtContactName);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.txtFax);
@@ -60,7 +62,7 @@
             this.groupBox1.Controls.Add(this.lblCategory);
             this.groupBox1.Controls.Add(this.txtCompanyName);
             this.groupBox1.Controls.Add(this.lblProductName);
-            this.groupBox1.Location = new System.Drawing.Point(12, 53);
+            this.groupBox1.Location = new System.Drawing.Point(133, 96);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(804, 359);
             this.groupBox1.TabIndex = 3;
@@ -178,7 +180,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 455);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.ClientSize = new System.Drawing.Size(1090, 599);
             this.Controls.Add(this.groupBox1);
             this.Name = "AddWholesalers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

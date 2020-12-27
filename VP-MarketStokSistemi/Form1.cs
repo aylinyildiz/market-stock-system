@@ -105,7 +105,7 @@ namespace VP_MarketStokSistemi
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             txtProductName.Text = dataGridView1.CurrentRow.Cells["ProductName"].Value.ToString();
-            comboBox1.Text = dataGridView1.CurrentRow.Cells["CategoryID"].Value.ToString();
+            comboBox1.SelectedValue = dataGridView1.CurrentRow.Cells["CategoryID"].Value.ToString();
             txtUnitPrice.Text = dataGridView1.CurrentRow.Cells["UnitPrice"].Value.ToString();
             txtUnitInStock.Text = dataGridView1.CurrentRow.Cells["UnitsInStock"].Value.ToString();
             txtQuantity.Text = dataGridView1.CurrentRow.Cells["QuantityPerUnit"].Value.ToString();

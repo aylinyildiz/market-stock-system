@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VP-MarketStokSistemi", "VP-MarketStokSistemi\VP-MarketStokSistemi.csproj", "{94C5A680-15A3-4C71-AC2F-F461AD652344}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MarketStockSetup", "MarketStockSetup\MarketStockSetup.vdproj", "{8CDEE87C-EAD4-4C02-807A-37D18D6CCBF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{94C5A680-15A3-4C71-AC2F-F461AD652344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94C5A680-15A3-4C71-AC2F-F461AD652344}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94C5A680-15A3-4C71-AC2F-F461AD652344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CDEE87C-EAD4-4C02-807A-37D18D6CCBF2}.Debug|Any CPU.ActiveCfg = Debug
+		{8CDEE87C-EAD4-4C02-807A-37D18D6CCBF2}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

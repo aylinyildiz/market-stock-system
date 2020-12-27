@@ -43,5 +43,16 @@ namespace VP_MarketStokSistemi
             }
 
         }
+
+        private void lblSignUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RegisterForm register = new RegisterForm();
+            register.ShowDialog();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
